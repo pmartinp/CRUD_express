@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 
 const cochesSchema = new Schema({
     id: String,
-    Marca: String,
-    Modelo: String,
-    Potencia: Number
+    marca: String,
+    modelo: String,
+    potencia: Number
 })
 
 const Coches = mongoose.model('Coches', cochesSchema, "coches");

@@ -1,19 +1,19 @@
 <%- include("template/cabecera", {tituloWeb: "Detalles"}) %>
 
 <div class="container">
-  <h1>Detalles del Pokémon</h1>
+  <h1>Detalles del Coche</h1>
   <% if (error) { %> <%= mensaje %>
-  <a href="/pokemon" class="btn btn-dark btn-block my-2"> Volver</a>
+  <a href="/coches" class="btn btn-dark btn-block my-2"> Volver</a>
   <% } %> <% if (!error) { %>
-<form id="editar" data-id="<%= pokemon._id %>">
-    <input type="number" value="<%= pokemon.id %>" class="form-control my-2" name="id" id="idInput">
-    <input type="text" value="<%= pokemon.nombre %>" class="form-control my-2" name="nombre" id="nombreInput">
-    <input type="text" value="<%= pokemon.tipo %>" class="form-control my-2" name="tipo" id="tipoInput">
-    <input type="text" value="<%= pokemon.descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput">
+<form id="editar" data-id="<%= coches._id %>">
+    <input type="number" value="<%= coches.id %>" class="form-control my-2" name="id" id="idInput">
+    <input type="text" value="<%= coches.marca %>" class="form-control my-2" name="marca" id="marcaInput">
+    <input type="text" value="<%= coches.modelo %>" class="form-control my-2" name="modelo" id="modeloInput">
+    <input type="number" value="<%= coches.potencia %>" class="form-control my-2" name="potencia" id="potenciaInput">
     <button type="submit" class="btn btn-dark btn-block">Actualizar</button>
 </form>
 <hr>
-<button class="btn btn-danger btn-sm" id="eliminar" data-id="<%= pokemon._id %>">Eliminar</button>
+<button class="btn btn-danger btn-sm" id="eliminar" data-id="<%= coches._id %>">Eliminar</button>
   <% } %>
 </div>
 
@@ -25,13 +25,13 @@
         console.log(btnEliminar.dataset.id)
         try {
 
-            const data = await fetch(`/pokemon/${btnEliminar.dataset.id}`, {
+            const data = await fetch(`/coches/${btnEliminar.dataset.id}`, {
                 method: 'delete'
             })
             const res = await data.json()
             console.log(res)
             if (res.estado) {
-                window.location.href = '/pokemon'
+                window.location.href = '/coches'
             } else {
                 console.log(res)
             }
@@ -46,20 +46,20 @@
     formEditar.addEventListener('submit', async (e) => {
         e.preventDefault()
         const id = formEditar.elements['id'].value
-        const nombre = formEditar.elements['nombre'].value
-        const tipo = formEditar.elements['tipo'].value
-        const descripcion = formEditar.elements['descripcion'].value
+        const marca = formEditar.elements['marca'].value
+        const modelo = formEditar.elements['modelo'].value
+        const potencia = formEditar.elements['potencia'].value
         const _id = formEditar.dataset.id
-        const data = await fetch(`/pokemon/${_id}`, {
+        const data = await fetch(`/coches/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({id, nombre, tipo, descripcion})
+            body: JSON.stringify({id, marca, modelo, potencia})
         })
         const res = await data.json()
         if (res.estado) {
-            window.location.href = '/pokemon'
+            window.location.href = '/coches'
         } else {
             console.log(res)
         }
